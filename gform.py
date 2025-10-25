@@ -52,10 +52,10 @@ for idx, row in enumerate(sheet.iter_rows(min_row=2, values_only=True), start=2)
             element.click()
             element.clear()
             element.send_keys(value)
-            print(f"✅ Filled field {i+1}: {value}")
+            print(f"Filled field {i+1}: {value}")
             time.sleep(random.uniform(0.3, 0.7))
         except IndexError:
-            print(f"⚠️ Skipped: No input found for '{value}' (index {i})")
+            print(f"Skipped: No input found for '{value}' (index {i})")
 
     try:
         date_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='date']")))
@@ -94,3 +94,4 @@ for idx, row in enumerate(sheet.iter_rows(min_row=2, values_only=True), start=2)
 
 print("\n All rows processed successfully!")
 driver.quit()
+
