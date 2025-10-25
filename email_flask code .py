@@ -7,22 +7,17 @@ app = Flask(__name__)
 
 @app.route('/')
 def send_email():
-    # --- Sender and Receiver Info ---
-    from_addr = "svdeepak725@gmail.com"          # Your Gmail
-    password = "qlce conc sfhy ersr"             # Your Gmail App Password
+    from_addr = "svdeepak725@gmail.com"          
+    password = "qlce conc sfhy ersr"             
 
-    # Recipients
-    to_addrs = ["tech@themedius.ai"]             # Primary recipient
-    cc_addrs = ["hr@themedius.ai"]               # CC recipient(s)
+    to_addrs = ["tech@themedius.ai"]             
+    cc_addrs = ["hr@themedius.ai"]               
 
-    # --- Email Setup ---
     msg = MIMEMultipart('alternative')
     msg['From'] = from_addr
     msg['To'] = ", ".join(to_addrs)
     msg['Cc'] = ", ".join(cc_addrs)
     msg['Subject'] = "Python (Selenium) Assignment - Deepak S"
-
-    # --- HTML Email Body with Updated Links ---
     html_body = """
     <html>
     <body>
@@ -47,17 +42,16 @@ def send_email():
 
     msg.attach(MIMEText(html_body, 'html'))
 
-    # --- Send Email ---
     try:
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         server.login(from_addr, password)
-        all_recipients = to_addrs + cc_addrs  # send to both TO and CC
+        all_recipients = to_addrs + cc_addrs 
         server.send_message(msg, from_addr=from_addr, to_addrs=all_recipients)
         server.quit()
-        return "✅ Email sent successfully to tech@themedius.ai with CC to hr@themedius.ai!"
+        return "Email sent successfully to tech@themedius.ai with CC to hr@themedius.ai!"
     except Exception as e:
-        return f"❌ Failed to send email: {e}"
+        return f" Failed to send email: {e}"
 
 if __name__ == "__main__":
     app.run(debug=True)
